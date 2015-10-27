@@ -1,2 +1,14 @@
-.idea
-pkg
+.*.sw?
+/pkg
+/spec/fixtures/*
+!/spec/fixtures/hiera
+/.rspec_system
+/.vagrant
+/.bundle
+/vendor
+/Gemfile.lock
+/Puppetfile.lock
+/junit
+/log
+/.tmp
+/.librarian
