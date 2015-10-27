@@ -1,0 +1,20 @@
+pipe("<%= @pipe %>"
+<%- unless @flags.nil? -%>
+    flags(<%= @flags %>)
+<%- end -%>
+<%- unless @follow_freq.nil? -%>
+    follow-freq(<%= @follow_freq %>)
+<%- end -%>
+<%- unless @keep_timestamp.nil? -%>
+    keep-timestamp(<%= @keep_timestamp ? 'yes' : 'no' %>)
+<%- end -%>
+<%- unless @program_override.nil? -%>
+    program-override(<%= @program_override %>)
+<%- end -%>
+<%- unless @tags.nil? -%>
+    tags(<%= @tags %>)
+<%- end -%>
+<%- unless @time_zone.nil? -%>
+    time-zone(<%= @time_zone %>)
+<%- end -%>
+);

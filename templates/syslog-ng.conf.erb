@@ -1,20 +1,29 @@
-@version: 3.5                                                                                                                                                                   
-@include "scl.conf"                                                                                                                                                             
-@include "`scl-root`/system/tty10.conf"                                                                                                                                         
+# This file is Managed by Puppet
+# Local changes will be lost!
+
+@version: <%= @config_version %>
+@include "scl.conf"
+<% if @create_tty10 -%>
+@include "tty10.conf"
+<% end -%>
 
 options {
-    chain_hostnames(<%= scope.lookupvar('syslog_ng::chain_hostnames') %>);
-    flush_lines(<%= scope.lookupvar('syslog_ng::flush_lines') %>);
-    threaded(<%= scope.lookupvar('syslog_ng::threaded') %>);
-    use_dns(<%= scope.lookupvar('syslog_ng::use_dns') %>);
-    use_fqdn(<%= scope.lookupvar('syslog_ng::use_fqdn') %>);
-    owner("<%= scope.lookupvar('syslog_ng::default_owner') %>");
-    group("<%= scope.lookupvar('syslog_ng::default_group') %>");
-    dir_owner("<%= scope.lookupvar('syslog_ng::default_owner') %>");
-    dir_group("<%= scope.lookupvar('syslog_ng::default_group') %>");
-    perm(<%= scope.lookupvar('syslog_ng::default_perm') %>);
-    stats_freq(<%= scope.lookupvar('syslog_ng::stats_freq') %>);
-    mark_freq(<%= scope.lookupvar('syslog_ng::mark_freq') %>);
+    chain_hostnames(<%= @chain_hostnames ? 'yes' : 'no' %>);
+    create_dirs(<%= @create_dirs ? 'yes' : 'no' %>);
+    dir_group(<%= @dir_group %>);
+    dir_owner(<%= @dir_owner %>);
+    dir_perm(<%= @dir_perm %>);
+    flush_lines(<%= @flush_lines %>);
+    group(<%= @group %>);
+    keep-hostname(<%= @keep_hostname ? 'yes' : 'no' %>);
+    log-fifo-size(<%= @log_fifo_size %>);
+    mark_freq(<%= @mark_freq %>);
+    owner(<%= @owner %>);
+    perm(<%= @perm %>);
+    stats_freq(<%= @stats_freq %>);
+    threaded(<%= @threaded ? 'yes' : 'no' %>);
+    use_dns(<%= @use_dns ? 'yes' : 'no'  %>);
+    use_fqdn(<%= @use_fqdn ? 'yes' : 'no' %>);
 };
 
-@include "<%= scope.lookupvar('syslog_ng::config_dir') -%>/*.conf"
+@include "<%= @conf_d_dir %>/*.conf"

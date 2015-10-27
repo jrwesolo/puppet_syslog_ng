@@ -1,37 +1,46 @@
-log {
-  source(<%= @source %>);
-<% if @parser -%>
-  parser(<%= parser %>);
-<% end -%>
-<% if @rewrite -%>
-  rewrite(<%= rewrite %>);
-<% end -%>
-<% if @filter.is_a?(Array) -%>
-<% @filter.each do |f| -%>
-  filter(<%= f %>);
-<% end -%>
-<% else -%>
-<% if @filter -%>
-  filter(<%= @filter %>);
-<% end -%>
-<% end -%>
-<% if @filter_spec -%>
-  filter(f_<%= @name %>);
-<% end -%>
-<% if @destination.is_a?(Array) -%>
-<% @destination_array.each do |d| -%>
-  destination(<%= d %>);
-<% end -%>
-<% else -%>
-<% if @destination -%>
-  destination(<%= @destination %>);
-<% end -%>
-<% end -%>
-<% if @file -%>
-  destination(d_<%= @name %>);
-<% end -%>
-<% if @fallback -%>
-flags(fallback);
-<% end -%>
-};
 
+<%- if @comment -%>
+<%= @comment.gsub(/^/, '# ').rstrip %>
+<%- end -%>
+log {
+<%- if @source -%>
+  <%- [*@source].compact.each do |s| -%>
+    source(<%= s %>);
+  <%- end -%>
+<%- end -%>
+<%- if @parser -%>
+  <%- [*@parser].compact.each do |p| -%>
+    parser(<%= p %>);
+  <%- end -%>
+<%- end -%>
+<%- if @parser_spec -%>
+    parser(p_<%= @title %>);
+<%- end -%>
+<%- if @rewrite -%>
+  <%- [*@rewrite].compact.each do |r| -%>
+    rewrite(<%= r %>);
+  <%- end -%>
+<%- end -%>
+<%- if @rewrite_spec -%>
+    rewrite(r_<%= @title %>);
+<%- end -%>
+<%- if @filter -%>
+  <%- [*@filter].compact.each do |f| -%>
+    filter(<%= f %>);
+  <%- end -%>
+<%- end -%>
+<%- if @filter_spec -%>
+    filter(f_<%= @title %>);
+<%- end -%>
+<%- if @destination -%>
+  <%- [*@destination].compact.each do |d| -%>
+    destination(<%= d %>);
+  <%- end -%>
+<%- end -%>
+<%- if @file -%>
+    destination(d_<%= @title %>);
+<%- end -%>
+<%- if @flags -%>
+    flags(<%= @flags %>);
+<%- end -%>
+};

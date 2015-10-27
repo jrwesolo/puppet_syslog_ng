@@ -1,0 +1,26 @@
+file("<%= @file %>"
+<%- unless @default_facility.nil? -%>
+    default-facility(<%= @default_facility %>)
+<%- end -%>
+<%- unless @default_priority.nil? -%>
+    default-priority(<%= @default_priority %>)
+<%- end -%>
+<%- unless @encoding.nil? -%>
+    encoding(<%= @encoding %>)
+<%- end -%>
+<%- unless @flags.nil? -%>
+    flags(<%= @flags %>)
+<%- end -%>
+<%- unless @follow_freq.nil? -%>
+    follow-freq(<%= @follow_freq %>)
+<%- end -%>
+<%- unless @keep_timestamp.nil? -%>
+    keep-timestamp(<%= @keep_timestamp ? 'yes' : 'no' %>)
+<%- end -%>
+<%- unless @tags.nil? -%>
+    tags(<%= @tags %>)
+<%- end -%>
+<%- unless @time_zone.nil? -%>
+    time-zone(<%= @time_zone %>)
+<%- end -%>
+);

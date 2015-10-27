@@ -1,0 +1,41 @@
+file("<%= @file %>"
+<%- unless @create_dirs.nil? -%>
+    create-dirs(<%= @create_dirs ? 'yes' : 'no' %>)
+<%- end -%>
+<%- unless @dir_group.nil? -%>
+    dir-group(<%= @dir_group %>)
+<%- end -%>
+<%- unless @dir_owner.nil? -%>
+    dir-owner(<%= @dir_owner %>)
+<%- end -%>
+<%- unless @dir_perm.nil? -%>
+    dir-perm(<%= @dir_perm %>)
+<%- end -%>
+<%- unless @flags.nil? -%>
+    flags(<%= @flags %>)
+<%- end -%>
+<%- unless @flush_lines.nil? -%>
+    flush-lines(<%= @flush_lines %>)
+<%- end -%>
+<%- unless @group.nil? -%>
+    group(<%= @group %>)
+<%- end -%>
+<%- unless @log_fifo_size.nil? -%>
+    log-fifo-size(<%= @log_fifo_size %>)
+<%- end -%>
+<%- unless @owner.nil? -%>
+    owner(<%= @owner %>)
+<%- end -%>
+<%- unless @perm.nil? -%>
+    perm(<%= @perm %>)
+<%- end -%>
+<%- unless @suppress.nil? -%>
+    suppress(<%= @suppress %>)
+<%- end -%>
+<%- unless @template.nil? -%>
+    template(<%= @template %>)
+<%- end -%>
+<%- unless @template_escape.nil? -%>
+    template-escape(<%= @template_escape ? 'yes' : 'no' %>)
+<%- end -%>
+);

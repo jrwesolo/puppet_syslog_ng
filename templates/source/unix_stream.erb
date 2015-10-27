@@ -1,0 +1,35 @@
+unix-stream("<%= @file %>"
+<%- unless @encoding.nil? -%>
+    encoding(<%= @encoding %>)
+<%- end -%>
+<%- unless @flags.nil? -%>
+    flags(<%= @flags %>)
+<%- end -%>
+<%- unless @group.nil? -%>
+    group(<%= @group %>)
+<%- end -%>
+<%- unless @host_override.nil? -%>
+    host-override(<%= @host_override %>)
+<%- end -%>
+<%- unless @keep_timestamp.nil? -%>
+    keep-timestamp(<%= @keep_timestamp ? 'yes' : 'no' %>)
+<%- end -%>
+<%- unless @max_connections.nil? -%>
+    max-connections(<%= @max_connections %>)
+<%- end -%>
+<%- unless @owner.nil? -%>
+    owner(<%= @owner %>)
+<%- end -%>
+<%- unless @perm.nil? -%>
+    perm(<%= @perm %>)
+<%- end -%>
+<%- unless @program_override.nil? -%>
+    program-override(<%= @program_override %>)
+<%- end -%>
+<%- unless @tags.nil? -%>
+    tags(<%= @tags %>)
+<%- end -%>
+<%- unless @time_zone.nil? -%>
+    time-zone(<%= @time_zone %>)
+<%- end -%>
+);
