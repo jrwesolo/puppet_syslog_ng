@@ -1,10 +1,13 @@
 # manage syslog-ng service
 class syslog_ng::service {
-  service { 'syslog_ng':
-    ensure     => 'running',
-    name       => 'syslog-ng',
-    hasstatus  => true,
-    hasrestart => true,
-    require    => Package['syslog-ng'],
+
+  if $::syslog_ng::manage_service {
+    service { $::syslog_ng::service:
+      ensure     => $::syslog_ng::service_ensure,
+      enable     => $::syslog_ng::service_enable,
+      hasstatus  => true,
+      hasrestart => true,
+    }
   }
+
 }
