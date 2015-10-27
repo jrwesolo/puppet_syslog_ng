@@ -4,7 +4,7 @@ class syslog_ng::config {
   $chain_hostnames = $::syslog_ng::chain_hostnames
   $conf_d_dir      = $::syslog_ng::conf_d_dir
   $config_version  = $::syslog_ng::config_version
-  $create_dirs     = $::syslog_nf::create_dirs
+  $create_dirs     = $::syslog_ng::create_dirs
   $create_tty10    = $::syslog_ng::create_tty10
   $dir_owner       = $::syslog_ng::dir_owner
   $dir_group       = $::syslog_ng::dir_group
