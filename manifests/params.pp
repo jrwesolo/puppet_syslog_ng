@@ -1,41 +1,95 @@
-# Standard parameters for the modul
 class syslog_ng::params {
-  $system_log_dir = '/var/log'
-  $config_dir     = '/etc/syslog-ng/conf.d'
-  $local_source   = 's_src'
-  $reminder_file  = undef
 
-  # Default global settings for syslog-ng
-  # See: http://www.balabit.com/sites/default/files/documents/syslog-ng-ose-3.5-guides/en/syslog-ng-ose-guide-admin/html/index.html
-  # See: http://www.balabit.com/sites/default/files/documents/syslog-ng-ose-3.5-guides/en/syslog-ng-ose-guide-admin/html/reference-options.html
-  #
+  # package/service settings
+  $config_dir     = '/etc/syslog-ng'
+  $manage_package = true
+  $package        = 'syslog-ng'
+  $manage_legacy  = true
+  $legacy_package = 'rsyslog'
+  $manage_service = true
+  $service_ensure = true
+  $service_enable = true
+  $service        = 'syslog-ng'
+
+  # the packaged tty10.conf seems to only exist on Ubuntu 14.04 and Debian 8
+  # we need this so we can create the file ourselves
+  $create_tty10 = true
+  $tty10_path   = '/dev/tty10'
+
+  # identifier for default internal/system source
+  $local_source   = 's_src'
+
   # Global permissions
-  $create_dirs               = true   # If true, all subdirectories are created. TODO: Maybe define for each file?
-  $default_owner             = 'root'
-  $default_group             = 'adm'
-  $default_perm              = '0640'
-  # DNS behaviour
-  $use_fqdn                  = 'no'
-  $use_dns                   = 'yes'
-  $chain_hostnames           = 'no'
-  # Logfile behaviour
-  $stats_freq                = 0
-  $mark_freq                 = 0
-  # Performance tweaks
-  $threaded                  = 'no'
-  $flush_lines               = 0
-  $log_fifo_size             = '10000'
-  # default is 10000, this is far to much. This should be enough for outgoing destinations
-  $log_fifo_size_destination = '1000'
+  $chain_hostnames = false  # enable or disable the chained hostname format
+  $create_dirs     = true   # enable or disable directory creation for destination files
+  $dir_owner       = 'root' # default owner of newly created directories
+  $dir_group       = 'root' # default group of newly created directories
+  $dir_perm        = '0700' # default permission of newly created directories
+  $flush_lines     = 0      # specifies how many lines are flushed to a destination at a time
+  $group           = 'root' # default group of output files
+  $keep_hostname   = false  # enable or disable hostname rewriting
+  $log_fifo_size   = 10000  # the number of messages that the output queue can store
+  $mark_freq       = 0      # The number of seconds between two MARK messages, 0 = disabled
+  $owner           = 'root' # default owner of output files
+  $perm            = '0600' # default permission of output files
+  $stats_freq      = 0      # the period between two STATS messages in seconds, 0 = disabled
+  $threaded        = false  # enable syslog-ng OSE to run in multithreaded mode and use multiple CPUs
+  $use_dns         = true   # enable or disable DNS usage
+  $use_fqdn        = false  # add FQDN instead of short hostname
 
   # Config file fragments
-  $config_file_sources              = "${config_dir}/10sources.conf"
-  $config_file_destination_files    = "${config_dir}/20destination_files.conf"
-  $config_file_destination_fallback = "${config_dir}/20destination_fallback.conf"
-  $config_file_destination_remote   = "${config_dir}/20destination_remote.conf"
-  $config_file_filter               = "${config_dir}/30filter.conf"
-  $config_file_parser               = "${config_dir}/40parser.conf"
-  $config_file_rewrite              = "${config_dir}/50rewrite.conf"
-  $config_file_logging              = "${config_dir}/90logging.conf"
-  $config_file_fallback             = "${config_dir}/99fallback.conf"
+  $config_file_source      = "10_source.conf"
+  $config_file_destination = "20_destination.conf"
+  $config_file_filter      = "30_filter.conf"
+  $config_file_parser      = "40_parser.conf"
+  $config_file_rewrite     = "50_rewrite.conf"
+  $config_file_logging     = "90_logging.conf"
+  $config_file_fallback    = "99_fallback.conf"
+
+  # set config_version based on operating system and version
+  case $::operatingsystem {
+    'RedHat', 'CentOS': {
+      case $::operatingsystemrelease {
+        /^6\./: {
+          $config_version = '3.2'
+        }
+        /^7\./: {
+          $config_version = '3.5'
+        }
+        default: {
+          $config_version = '3.5' # fallback
+        }
+      }
+    }
+    'Debian': {
+      case $::operatingsystemrelease {
+        /^7\./: {
+          $config_version = '3.3'
+        }
+        /^8\./: {
+          $config_version = '3.5'
+        }
+        default: {
+          $config_version = '3.5' # fallback
+        }
+      }
+    }
+    'Ubuntu': {
+      case $::operatingsystemrelease {
+        /^12\./: {
+          $config_version = '3.3'
+        }
+        /^14\./: {
+          $config_version = '3.5'
+        }
+        default: {
+          $config_version = '3.5' # fallback
+        }
+      }
+    }
+    default: {
+      fail("${::operatingsystem} not supported")
+    }
+  }
+
 }
