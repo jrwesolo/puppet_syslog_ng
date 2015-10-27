@@ -20,6 +20,9 @@ network(
 <%- unless @localport.nil? -%>
     localport(<%= @localport %>)
 <%- end -%>
+<%- unless @max_connections.nil? -%>
+    max-connections(<%= @max_connections %>)
+<%- end -%>
 <%- unless @program_override.nil? -%>
     program-override(<%= @program_override %>)
 <%- end -%>

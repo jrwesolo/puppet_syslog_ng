@@ -9,6 +9,7 @@ define syslog_ng::source::network (
   $keep_timestamp   = undef,
   $localip          = undef,
   $localport        = undef,
+  $max_connections  = undef,
   $order            = undef,
   $program_override = undef,
   $tags             = undef,
