@@ -39,8 +39,14 @@ define syslog_ng::log (
   }
 
   if $file {
-    syslog_ng::destination::file { "d_${title}":
+    syslog_ng::destination::file { "d_file_${title}":
       file => $file,
+    }
+  }
+
+  if $network {
+    syslog_ng::destination::network { "d_net_${title}":
+      network => $network,
     }
   }
 

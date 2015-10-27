@@ -1,4 +1,8 @@
+<%- if @network -%>
+network("<%= @network.split(':', 2).at(0) %>"
+<%- else -%>
 network("<%= @address %>"
+<%- end -%>
 <%- unless @flags.nil? -%>
     flags(<%= @flags %>)
 <%- end -%>
@@ -17,7 +21,9 @@ network("<%= @address %>"
 <%- unless @log_fifo_size.nil? -%>
     log-fifo-size(<%= @log_fifo_size %>)
 <%- end -%>
-<%- unless @port.nil? -%>
+<%- if @network && @network.split(':', 2).at(1) -%>
+    port(<%= @network.split(':', 2).at(1) %>)
+<%- elsif @port -%>
     port(<%= @port %>)
 <%- end -%>
 <%- unless @suppress.nil? -%>

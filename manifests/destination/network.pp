@@ -9,6 +9,7 @@ define syslog_ng::destination::network (
   $localip         = undef,
   $localport       = undef,
   $log_fifo_size   = undef,
+  $network         = undef,
   $order           = undef,
   $port            = undef,
   $suppress        = undef,

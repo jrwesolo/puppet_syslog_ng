@@ -38,7 +38,10 @@ log {
   <%- end -%>
 <%- end -%>
 <%- if @file -%>
-    destination(d_<%= @title %>);
+    destination(d_file_<%= @title %>);
+<%- end -%>
+<%- if @network -%>
+    destination(d_net_<%= @title %>);
 <%- end -%>
 <%- if @flags -%>
     flags(<%= @flags %>);
