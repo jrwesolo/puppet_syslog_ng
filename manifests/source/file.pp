@@ -10,6 +10,7 @@ define syslog_ng::source::file (
   $identifier       = $title,
   $keep_timestamp   = undef,
   $order            = undef,
+  $program_override = undef,
   $tags             = undef,
   $time_zone        = undef,
 ) {

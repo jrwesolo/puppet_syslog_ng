@@ -17,6 +17,9 @@ file("<%= @file %>"
 <%- unless @keep_timestamp.nil? -%>
     keep-timestamp(<%= @keep_timestamp ? 'yes' : 'no' %>)
 <%- end -%>
+<%- unless @program_override.nil? -%>
+    program-override(<%= @program_override %>)
+<%- end -%>
 <%- unless @tags.nil? -%>
     tags(<%= @tags %>)
 <%- end -%>
