@@ -9,7 +9,7 @@ define syslog_ng::rewrite (
   $entry_type = 'rewrite'
 
   concat::fragment { "${entry_type}_${title}":
-    target  => $::syslog_ng::config_file_rewrite,
+    target  => $::syslog_ng::config_path_rewrite,
     content => template('syslog_ng/entry.erb'),
     order   => $order,
   }
