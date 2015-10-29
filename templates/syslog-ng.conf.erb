@@ -21,9 +21,12 @@ options {
     owner(<%= @owner %>);
     perm(<%= @perm %>);
     stats_freq(<%= @stats_freq %>);
+<%- unless @threaded.nil? -%>
     threaded(<%= @threaded ? 'yes' : 'no' %>);
+<%- end -%>
     use_dns(<%= @use_dns ? 'yes' : 'no'  %>);
     use_fqdn(<%= @use_fqdn ? 'yes' : 'no' %>);
 };
 
-@include "<%= @conf_d_dir %>/*.conf"
+<%-# Not appending *.conf to this as syslog-ng 3.2.5 had a problem -%>
+@include "<%= @conf_d_dir %>/"

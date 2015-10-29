@@ -33,9 +33,12 @@ class syslog_ng::params {
   $owner           = 'root' # default owner of output files
   $perm            = '0600' # default permission of output files
   $stats_freq      = 0      # the period between two STATS messages in seconds, 0 = disabled
-  $threaded        = false  # enable syslog-ng OSE to run in multithreaded mode and use multiple CPUs
   $use_dns         = true   # enable or disable DNS usage
   $use_fqdn        = false  # add FQDN instead of short hostname
+
+  # Platform-specific options
+  # $threaded # This is not available on CentOS 6 using syslog-ng 3.2.5
+  $threaded = undef # setting this to undef for now so user has to pass value
 
   # Config file fragments
   $config_file_source      = "10_source.conf"
