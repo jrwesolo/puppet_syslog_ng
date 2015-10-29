@@ -33,7 +33,7 @@ file("<%= @file %>"
     suppress(<%= @suppress %>)
 <%- end -%>
 <%- unless @template.nil? -%>
-    template(<%= @template %>)
+    template("<%= @template %>")
 <%- end -%>
 <%- unless @template_escape.nil? -%>
     template-escape(<%= @template_escape ? 'yes' : 'no' %>)
