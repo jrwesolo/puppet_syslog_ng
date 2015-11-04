@@ -1,0 +1,40 @@
+syslog("<%= @host.split(':', 2).at(0) %>"
+<%- unless @flags.nil? -%>
+    flags(<%= @flags %>)
+<%- end -%>
+<%- unless @flush_lines.nil? -%>
+    flush-lines(<%= @flush_lines %>)
+<%- end -%>
+<%- unless @ip_protocol.nil? -%>
+    ip-protocol(<%= @ip_protocol %>)
+<%- end -%>
+<%- unless @localip.nil? -%>
+    localip(<%= @localip %>)
+<%- end -%>
+<%- unless @localport.nil? -%>
+    localport(<%= @localport %>)
+<%- end -%>
+<%- unless @log_fifo_size.nil? -%>
+    log-fifo-size(<%= @log_fifo_size %>)
+<%- end -%>
+<%- if @port -%>
+    port(<%= @port %>)
+<%- elsif @host && @host.split(':', 2).at(1) -%>
+    port(<%= @host.split(':', 2).at(1) %>)
+<%- end -%>
+<%- unless @suppress.nil? -%>
+    suppress(<%= @suppress %>)
+<%- end -%>
+<%- unless @template.nil? -%>
+    template("<%= @template %>")
+<%- end -%>
+<%- unless @template_escape.nil? -%>
+    template-escape(<%= @template_escape ? 'yes' : 'no' %>)
+<%- end -%>
+<%- unless @time_zone.nil? -%>
+    time-zone(<%= @time_zone %>)
+<%- end -%>
+<%- unless @transport.nil? -%>
+    transport(<%= @transport %>)
+<%- end -%>
+);
