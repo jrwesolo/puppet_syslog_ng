@@ -1,6 +1,6 @@
 # syslog network destination
 define syslog_ng::destination::network (
-  $address         = undef,
+  $host            = undef,
   $comment         = undef,
   $flags           = undef,
   $flush_lines     = undef,
@@ -9,7 +9,6 @@ define syslog_ng::destination::network (
   $localip         = undef,
   $localport       = undef,
   $log_fifo_size   = undef,
-  $network         = undef,
   $order           = undef,
   $port            = undef,
   $suppress        = undef,
