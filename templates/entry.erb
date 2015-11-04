@@ -1,7 +1,9 @@
+<%- [*@spec].compact.each_with_index do |spec, index| -%>
 
 <%- if @comment -%>
 <%= @comment.gsub(/^/, '# ').rstrip %>
 <%- end -%>
-<%= @entry_type %> <%= @identifier %> {
-<%= @spec.gsub(/^/, '    ').rstrip %>
+<%= @entry_type %> <%= @identifier %><%= index.zero? ? nil : "_#{index + 1}" %> {
+<%= spec.gsub(/^/, '    ').rstrip %>
 };
+<%- end -%>
