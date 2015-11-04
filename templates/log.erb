@@ -14,7 +14,9 @@ log {
   <%- end -%>
 <%- end -%>
 <%- if @parser_spec -%>
-    parser(p_<%= @title %>);
+  <%- [*@parser_spec].compact.each_index do |index| -%>
+    parser(p_<%= @title %><%= index.zero? ? nil : "_#{index + 1}" %>);
+  <%- end -%>
 <%- end -%>
 <%- if @rewrite -%>
   <%- [*@rewrite].compact.each do |r| -%>
@@ -22,7 +24,9 @@ log {
   <%- end -%>
 <%- end -%>
 <%- if @rewrite_spec -%>
-    rewrite(r_<%= @title %>);
+  <%- [*@rewrite_spec].compact.each_index do |index| -%>
+    rewrite(r_<%= @title %><%= index.zero? ? nil : "_#{index + 1}" %>);
+  <%- end -%>
 <%- end -%>
 <%- if @filter -%>
   <%- [*@filter].compact.each do |f| -%>
@@ -30,7 +34,9 @@ log {
   <%- end -%>
 <%- end -%>
 <%- if @filter_spec -%>
-    filter(f_<%= @title %>);
+  <%- [*@filter_spec].compact.each_index do |index| -%>
+    filter(f_<%= @title %><%= index.zero? ? nil : "_#{index + 1}" %>);
+  <%- end -%>
 <%- end -%>
 <%- if @destination -%>
   <%- [*@destination].compact.each do |d| -%>
@@ -42,6 +48,9 @@ log {
 <%- end -%>
 <%- if @network -%>
     destination(d_net_<%= @title %>);
+<%- end -%>
+<%- if @syslog -%>
+    destination(d_syslog_<%= @title %>);
 <%- end -%>
 <%- if @flags -%>
     flags(<%= @flags %>);

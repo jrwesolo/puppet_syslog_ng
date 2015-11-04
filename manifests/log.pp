@@ -1,18 +1,20 @@
 # Generic syslog_ng log
 define syslog_ng::log (
-  $source       = $::syslog_ng::local_source,
-  $comment      = undef,
-  $filter       = undef,
-  $filter_spec  = undef,
-  $order        = undef,
-  $parser       = undef,
-  $parser_spec  = undef,
-  $rewrite      = undef,
-  $rewrite_spec = undef,
-  $destination  = undef,
-  $file         = undef,
-  $network      = undef,
-  $flags        = undef,
+  $source        = $::syslog_ng::local_source,
+  $comment       = undef,
+  $filter        = undef,
+  $filter_spec   = undef,
+  $order         = undef,
+  $parser        = undef,
+  $parser_spec   = undef,
+  $rewrite       = undef,
+  $rewrite_spec  = undef,
+  $destination   = undef,
+  $file          = undef,
+  $file_template = undef,
+  $network       = undef,
+  $syslog        = undef,
+  $flags         = undef,
 ) {
 
   $target = $flags ? {
@@ -22,31 +24,44 @@ define syslog_ng::log (
 
   if $filter_spec {
     syslog_ng::filter { "f_${title}":
-      spec => $filter_spec,
+      comment => $comment,
+      spec    => $filter_spec,
     }
   }
 
   if $parser_spec {
     syslog_ng::parser { "p_${title}":
-      spec => $parser_spec,
+      comment => $comment,
+      spec    => $parser_spec,
     }
   }
 
   if $rewrite_spec {
     syslog_ng::rewrite { "r_${title}":
-      spec => $rewrite_spec,
+      comment => $comment,
+      spec    => $rewrite_spec,
     }
   }
 
   if $file {
     syslog_ng::destination::file { "d_file_${title}":
-      file => $file,
+      comment  => $comment,
+      file     => $file,
+      template => $file_template,
     }
   }
 
   if $network {
     syslog_ng::destination::network { "d_net_${title}":
-      network => $network,
+      comment => $comment,
+      host    => $network,
+    }
+  }
+
+  if $syslog {
+    syslog_ng::destination::syslog { "d_syslog_${title}":
+      comment => $comment,
+      host    => $syslog,
     }
   }
 
