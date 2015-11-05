@@ -14,6 +14,7 @@ define syslog_ng::log (
   $file_template = undef,
   $network       = undef,
   $syslog        = undef,
+  $pipe          = undef,
   $flags         = undef,
 ) {
 
@@ -62,6 +63,13 @@ define syslog_ng::log (
     syslog_ng::destination::syslog { "d_syslog_${title}":
       comment => $comment,
       host    => $syslog,
+    }
+  }
+
+  if $pipe {
+    syslog_ng::destination::pipe { "d_pipe_${title}":
+      comment => $comment,
+      pipe    => $pipe,
     }
   }
 

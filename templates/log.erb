@@ -52,6 +52,9 @@ log {
 <%- if @syslog -%>
     destination(d_syslog_<%= @title %>);
 <%- end -%>
+<%- if @pipe -%>
+    destination(d_pipe_<%= @title %>);
+<%- end -%>
 <%- if @flags -%>
     flags(<%= @flags %>);
 <%- end -%>
