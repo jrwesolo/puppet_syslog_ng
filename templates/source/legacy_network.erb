@@ -1,0 +1,32 @@
+<%= @transport || 'tcp' %><%= @ip_protocol.to_i == 6 ? 6 : nil %>(
+<%- unless @flags.nil? -%>
+    flags(<%= @flags %>)
+<%- end -%>
+<%- unless @host_override.nil? -%>
+    host-override(<%= @host_override %>)
+<%- end -%>
+<%- unless @keep_hostname.nil? -%>
+    keep-hostname(<%= @keep_hostname ? 'yes' : 'no' %>)
+<%- end -%>
+<%- unless @keep_timestamp.nil? -%>
+    keep-timestamp(<%= @keep_timestamp ? 'yes' : 'no' %>)
+<%- end -%>
+<%- unless @localip.nil? -%>
+    localip(<%= @localip %>)
+<%- end -%>
+<%- unless @localport.nil? -%>
+    localport(<%= @localport %>)
+<%- end -%>
+<%- unless @max_connections.nil? -%>
+    max-connections(<%= @max_connections %>)
+<%- end -%>
+<%- unless @program_override.nil? -%>
+    program-override(<%= @program_override %>)
+<%- end -%>
+<%- unless @tags.nil? -%>
+    tags(<%= @tags %>)
+<%- end -%>
+<%- unless @time_zone.nil? -%>
+    time-zone(<%= @time_zone %>)
+<%- end -%>
+);

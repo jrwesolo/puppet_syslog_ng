@@ -1,12 +1,9 @@
-network("<%= @parsed_host['address'] %>"
+<%= @transport || 'tcp' %><%= @ip_protocol.to_i == 6 ? 6 : nil %>("<%= @parsed_host['address'] %>"
 <%- unless @flags.nil? -%>
     flags(<%= @flags %>)
 <%- end -%>
 <%- unless @flush_lines.nil? -%>
     flush-lines(<%= @flush_lines %>)
-<%- end -%>
-<%- unless @ip_protocol.nil? -%>
-    ip-protocol(<%= @ip_protocol %>)
 <%- end -%>
 <%- unless @localip.nil? -%>
     localip(<%= @localip %>)
@@ -33,8 +30,5 @@ network("<%= @parsed_host['address'] %>"
 <%- end -%>
 <%- unless @time_zone.nil? -%>
     time-zone(<%= @time_zone %>)
-<%- end -%>
-<%- unless @transport.nil? -%>
-    transport(<%= @transport %>)
 <%- end -%>
 );
