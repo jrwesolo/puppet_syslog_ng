@@ -17,8 +17,15 @@ define syslog_ng::source::network (
   $transport        = undef,
 ) {
 
+  if versioncmp($::syslog_ng::config_version, '3.4') < 0 {
+    $source_template = 'syslog_ng/source/legacy_network.erb'
+  }
+  else {
+    $source_template = 'syslog_ng/source/network.erb'
+  }
+
   syslog_ng::source { $title:
-    spec       => template('syslog_ng/source/network.erb'),
+    spec       => template($source_template),
     identifier => $identifier,
     comment    => $comment,
     order      => $order,

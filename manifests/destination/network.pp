@@ -18,8 +18,17 @@ define syslog_ng::destination::network (
   $transport       = undef,
 ) {
 
+  if versioncmp($::syslog_ng::config_version, '3.4') < 0 {
+    $destination_template = 'syslog_ng/destination/legacy_network.erb'
+  }
+  else {
+    $destination_template = 'syslog_ng/destination/network.erb'
+  }
+
+  $parsed_host = syslog_parse_host($host)
+
   syslog_ng::destination { $title:
-    spec       => template('syslog_ng/destination/network.erb'),
+    spec       => template($destination_template),
     identifier => $identifier,
     comment    => $comment,
     order      => $order,
